@@ -1,0 +1,22 @@
+easy_admin:
+  entities:
+    Machines:
+      class: App\Entity\Machines
+      list:
+        fields:
+          - { property: 'name'}
+          - { property: "image", type: 'image', label: 'image', base_path: '/uploads/machines' }
+      form:
+        fields:
+          - { property: 'name'}
+          - property: "MachineCategory"
+            type: "entity"
+            type_options:
+              class: 'App\Entity\MachineCategory'
+              choice_label: "name"
+          - property: "imageFile"
+            type: 'vich_image'
+            label: 'Image'
+            type_options:
+              allow_delete: false
+              download_uri: false

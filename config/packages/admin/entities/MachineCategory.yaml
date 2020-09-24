@@ -1,0 +1,10 @@
+easy_admin:
+  entities:
+    MachineCategory:
+      class: App\Entity\MachineCategory
+      list:
+        fields:
+          - { property: 'name'}
+      form:
+        fields:
+          - { property: 'name'}

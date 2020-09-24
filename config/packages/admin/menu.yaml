@@ -4,7 +4,8 @@ easy_admin:
       - label: "Site"
         icon: "newspaper-o"
         children:
-          - { entity: "Example", icon: newspaper-o, label: "Example" }
+          - { entity: "MachineCategory", icon: newspaper-o, label: "Categories de machines" }
+          - { entity: "Machines", icon: newspaper-o, label: "Machines" }
 
       - label: "User"
         icon: "user-circle"
