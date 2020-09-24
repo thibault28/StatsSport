@@ -5,11 +5,12 @@ easy_admin:
       list:
         fields:
           - { property: 'name'}
-          - { property: "image", type: 'image', label: 'image', base_path: '/uploads/machines' }
+          - { property: "image", type: 'image', label: 'Image', base_path: '/uploads/machines' }
+          - { property: 'machineCategory.name', label: 'Catégorie'}
       form:
         fields:
           - { property: 'name'}
-          - property: "MachineCategory"
+          - property: "machineCategory"
             type: "entity"
             type_options:
               class: 'App\Entity\MachineCategory'

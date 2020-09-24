@@ -56,7 +56,7 @@ class Machines
      * @ORM\ManyToOne(targetEntity=MachineCategory::class, inversedBy="machines")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $MachineCategory;
+    private $machineCategory;
 
     public function getId(): ?int
     {
@@ -111,14 +111,14 @@ class Machines
         return $this;
     }
 
-    public function getMachineCategory(): ?MachineCategory
+    public function getmachineCategory(): ?machineCategory
     {
-        return $this->MachineCategory;
+        return $this->machineCategory;
     }
 
-    public function setMachineCategory(?MachineCategory $MachineCategory): self
+    public function setmachineCategory(?machineCategory $machineCategory): self
     {
-        $this->MachineCategory = $MachineCategory;
+        $this->machineCategory = $machineCategory;
 
         return $this;
     }

@@ -22,19 +22,17 @@ class MachinesRepository extends ServiceEntityRepository
     // /**
     //  * @return Machines[] Returns an array of Machines objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function findAllOrderByMachineCategory()
     {
         return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
+            ->leftJoin('m.machineCategory', 'category')
+            ->orderBy('category.name', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Machines

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Machine{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    {% set category = "" %}
+        <div class="row">
+    {% for machine in machines %}
+
+
+
+        {% if category != machine.machineCategory.name %}
+    
+        {% set category = machine.machineCategory.name %}
+    
+        <h1 class="col-12">{{machine.machineCategory.name}} </h1>
+            
+        {% endif %}
+
+        <div class="card col-3 offset-1">
+            <img class="card-img-top" src="{{  asset('uploads/machines/'~machine.image ) }}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{machine.name}}</h5>
+              {% if app.user %}
+                  
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+              {% endif %}
+            </div>
+          </div>
+    </a>
+
+    
+    
+    {% endfor %}
+</div>
+
+
+</div>
+
+
+{% endblock %}
