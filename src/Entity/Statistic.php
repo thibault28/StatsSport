@@ -28,7 +28,7 @@ class Statistic
     private $weight;
 
     /**
-     * @ORM\Column(type="time", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
     private $time;
 
@@ -74,12 +74,12 @@ class Statistic
         return $this;
     }
 
-    public function getTime(): ?\DateTimeInterface
+    public function getTime(): ?float
     {
         return $this->time;
     }
 
-    public function setTime(?\DateTimeInterface $time): self
+    public function setTime(?float $time): self
     {
         $this->time = $time;
 

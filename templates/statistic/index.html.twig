@@ -7,14 +7,14 @@
 <div class="container-fluid">
 <div class="row">
 
-    <h1 class="col-12">{{machine.name}}</h1>
+    <h1 class="col-12 text-center">{{machine.name}}</h1>
 </div>
 <div class="row">
-    <div class="col-4">
-        <img src="{{  asset('uploads/machines/'~machine.image ) }}">
+    <div class="col-lg-4 offset-sm-2 col-8">
+        <img src="{{  asset('uploads/machines/'~machine.image ) }}" class="col-12">
 
     </div>
-    <div class="col-8">
+    <div class="col-lg-8 offset-sm-1 col-10">
 
         {% if statistics is not empty %}  
         <canvas id="myChart"></canvas>
@@ -34,24 +34,17 @@
 
 {% set arrayStat = arrayWeight %}
 
-{% elseif null in arrayWeight %}
+{% elseif arrayWeight is empty %}
 
 {% set arrayStat = arrayTime %}
 
 
 {% endif %}
-
 <script>
 
 
 // parse labels and data
-{% if arrayTime is not empty %}
-var data = {{arrayStat|json_encode()|raw}}.map(e => moment(e, 'mm:ss'));
-console.log(data);
-{% else %}
-var data = {{arrayStat|json_encode()|raw}};
-    
-{% endif %}
+
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
    type: 'line',
@@ -69,7 +62,7 @@ var myChart = new Chart(ctx, {
 
         {% endif %}
          
-         data: data,
+         data: {{arrayStat|json_encode()|raw}},
          borderWidth: 1
       }]
    },
@@ -90,15 +83,6 @@ var myChart = new Chart(ctx, {
             },
         }],
          yAxes: [{
-            {% if arrayTime is not empty %}
-            type: 'time',
-            time: {
-               tooltipFormat: "mm:ss",
-               displayFormats: {
-                second: 'mm:ss'
-               }
-            },
-            {% endif %}
             scaleLabel: {
                 display: true,
                 {% if arrayTime is not empty %}
@@ -112,6 +96,7 @@ var myChart = new Chart(ctx, {
       },
    }
 });
+
 </script>
 
 {% endblock %}
