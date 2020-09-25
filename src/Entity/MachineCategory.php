@@ -25,7 +25,7 @@ class MachineCategory
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Machines::class, mappedBy="MachineCategory")
+     * @ORM\OneToMany(targetEntity=Machines::class, mappedBy="machineCategory")
      */
     private $machines;
 

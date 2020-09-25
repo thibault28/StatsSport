@@ -21,12 +21,12 @@
         {% endif %}
 
         <div class="card col-3 offset-1">
-            <img class="card-img-top" src="{{  asset('uploads/machines/'~machine.image ) }}" alt="Card image cap">
+            <img class="card-img-top" src="{{  asset('uploads/machines/'~machine.image ) }}">
             <div class="card-body">
               <h5 class="card-title">{{machine.name}}</h5>
               {% if app.user %}
                   
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <a href="{{path('statistic_index', {'machine': machine.id})}} " class="btn btn-primary">Go somewhere</a>
               {% endif %}
             </div>
           </div>

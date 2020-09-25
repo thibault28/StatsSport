@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Statistique{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+<div class="row">
+
+    <h1 class="col-12">{{machine.name}}</h1>
+</div>
+<div class="row">
+    <div class="col-4">
+        <img src="{{  asset('uploads/machines/'~machine.image ) }}">
+
+    </div>
+    <div class="col-8">
+
+        {% if statistics is not empty %}  
+        <canvas id="myChart"></canvas>
+        {% endif %}
+    </div>
+</div>
+
+
+</div>
+
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
+
+{% if  arrayTime is empty %}
+
+{% set arrayStat = arrayWeight %}
+
+{% elseif null in arrayWeight %}
+
+{% set arrayStat = arrayTime %}
+
+
+{% endif %}
+
+<script>
+
+
+// parse labels and data
+{% if arrayTime is not empty %}
+var data = {{arrayStat|json_encode()|raw}}.map(e => moment(e, 'mm:ss'));
+console.log(data);
+{% else %}
+var data = {{arrayStat|json_encode()|raw}};
+    
+{% endif %}
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+   type: 'line',
+   data: {
+      labels: {{arrayDate|json_encode()|raw}},
+      datasets: [{
+        {% if arrayTime is not empty %}
+        label: 'Statistiques/Temps',
+         backgroundColor: 'rgb(255, 99, 132)',
+         borderColor: 'rgb(255, 99, 132)',
+        {% else %}
+        label: 'Statistiques/Poids',
+         backgroundColor: 'rgb(120, 255, 100)',
+         borderColor: 'rgb(120, 255, 100)',
+
+        {% endif %}
+         
+         data: data,
+         borderWidth: 1
+      }]
+   },
+   options: {
+   
+    responsive: true,
+    title: {
+        display: true,
+        text: 'Statistiques'
+    },
+      scales: {
+        xAxes: [{
+            display: true,
+                
+            scaleLabel: {
+              display: true,
+              labelString: 'Date'
+            },
+        }],
+         yAxes: [{
+            {% if arrayTime is not empty %}
+            type: 'time',
+            time: {
+               tooltipFormat: "mm:ss",
+               displayFormats: {
+                second: 'mm:ss'
+               }
+            },
+            {% endif %}
+            scaleLabel: {
+                display: true,
+                {% if arrayTime is not empty %}
+                labelString: 'Temps'
+                {% else %}
+                labelString: 'Poids'
+
+                {% endif %}
+            }
+         }]
+      },
+   }
+});
+</script>
+
+{% endblock %}
+{% endblock %}

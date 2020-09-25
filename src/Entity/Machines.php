@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MachinesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -57,6 +59,16 @@ class Machines
      * @ORM\JoinColumn(nullable=false)
      */
     private $machineCategory;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Statistic::class, mappedBy="machine")
+     */
+    private $statistics;
+
+    public function __construct()
+    {
+        $this->statistics = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +131,37 @@ class Machines
     public function setmachineCategory(?machineCategory $machineCategory): self
     {
         $this->machineCategory = $machineCategory;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Statistic[]
+     */
+    public function getStatistics(): Collection
+    {
+        return $this->statistics;
+    }
+
+    public function addStatistic(Statistic $statistic): self
+    {
+        if (!$this->statistics->contains($statistic)) {
+            $this->statistics[] = $statistic;
+            $statistic->setMachine($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatistic(Statistic $statistic): self
+    {
+        if ($this->statistics->contains($statistic)) {
+            $this->statistics->removeElement($statistic);
+            // set the owning side to null (unless already changed)
+            if ($statistic->getMachine() === $this) {
+                $statistic->setMachine(null);
+            }
+        }
 
         return $this;
     }
