@@ -1,9 +1,68 @@
 {% extends "base.html.twig" %}
 {% block body %}
 
-{{ form_start(form) }}
-{{ form_widget(form) }}
-<input type="submit" value="Envoyer" class="btn btn-primary">
-{{ form_end(form) }}
+
+        
+        {{ form_start(form) }}
+
+
+            {{form_row(form.machine)}}
+            
+            <div class="form-group">
+                <label for="weightTime">Example select</label>
+                <select class="form-control" id="weightTime">
+                  <option value="">Séléctionner une option</option>
+                  <option value="weight">Poids</option>
+                  <option value="time">Temps</option>
+                </select>
+              </div>
+            
+            {{form_label(form.weight,null, {'label_attr': {'class': 'weight d-none'}})}}
+            {{form_widget(form.weight, {'attr': {'class': 'weight d-none'}})}}
+
+
+            {{form_label(form.minutes,null, {'label_attr': {'class': 'time d-none'}})}}
+            {{form_widget(form.minutes, {'attr': {'class': 'time d-none'}})}}
+
+
+            {{form_label(form.seconds,null, {'label_attr': {'class': 'time d-none'}})}}
+            {{form_widget(form.seconds, {'attr': {'class': 'time d-none'}})}}
+
+
+            <input type="submit" value="Envoyer" class="submit btn btn-primary mt-4 d-none">
+            {{ form_end(form) }}
+</div>
     
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+       $(document).ready(function(){
+        let weightTime = $("#weightTime");
+        showElement(weightTime);
+    
+        weightTime.change(function(){
+            showElement($(this));
+        });
+    });
+
+       function showElement(element){
+        if(element.val() == "weight"){
+            $(".weight").removeClass("d-none");
+            $(".submit").removeClass("d-none");
+            $(".time").addClass("d-none");
+        }
+        else if(element.val() == "time"){
+            $(".time").removeClass("d-none");
+            $(".weight").addClass("d-none");
+            $(".submit").removeClass("d-none");
+        }
+        else{
+            $(".time").addClass("d-none");
+            $(".weight").addClass("d-none");
+            $(".submit").addClass("d-none");
+        }
+       }
+
+    </script>
 {% endblock %}

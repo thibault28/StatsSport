@@ -1,0 +1,42 @@
+$buttonColor: red;
+$buttonColorHover: darken($buttonColor, 20%);
+$inputColor: rgba($color: $buttonColor, $alpha: 0.5);
+$inputColorFocus: rgba($color: darken($inputColor, 5%), $alpha: 0.5);
+$textColor: white;
+
+body.dark{
+    background-color: #000;
+}
+h1.dark,
+h2.dark,
+h3.dark,
+h4.dark,
+h5.dark,
+h6.dark,
+label.dark{
+    color: $textColor;
+}
+.card.dark{
+    background-color: rgba($color: #888, $alpha: 0.6);
+    border: 1px solid $buttonColor;
+}
+a.btn.btn-primary.dark,
+input.btn.btn-primary.dark{
+    background-color: $buttonColor;
+    border: 1px solid $buttonColor;
+}
+a.btn.btn-primary.dark:hover,
+input.btn.btn-primary.dark:hover{
+    background-color: $buttonColorHover;
+    border: 1px solid $buttonColorHover;
+}
+input[type='text'].dark,
+select.dark{
+    background-color: $inputColor;
+    color: $textColor;
+}
+input[type='text'].dark:focus,
+select.dark:focus{
+    background-color: $inputColorFocus;
+    color: $textColor;
+}

@@ -16,17 +16,17 @@
     
         {% set category = machine.machineCategory.name %}
     
-        <h1 class="col-12">{{machine.machineCategory.name}} </h1>
+        <h1 class="col-12">{{category}} </h1>
             
         {% endif %}
 
-        <div class="card col-3 offset-1">
+        <div class="card mt-md-0 mt-4 col-lg-3 col-md-5 col-10 offset-1">
             <img class="card-img-top" src="{{  asset('uploads/machines/'~machine.image ) }}">
             <div class="card-body">
               <h5 class="card-title">{{machine.name}}</h5>
               {% if app.user %}
                   
-              <a href="{{path('statistic_index', {'id': machine.id})}} " class="btn btn-primary">Go somewhere</a>
+              <a href="{{path('statistic_index', {'id': machine.id})}} " class="btn btn-primary">Voir les statistiques</a>
               {% endif %}
             </div>
           </div>

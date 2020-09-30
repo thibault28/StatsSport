@@ -20,7 +20,8 @@ class StatisticType extends AbstractType
         $builder
             ->add('weight',NumberType::class,[
                 'scale' => 1,
-                'required' =>false
+                'required' =>false,
+                'label'=>'Poids'
             ])
             ->add('minutes', ChoiceType::class, array(
                 'mapped' => false,
@@ -29,6 +30,7 @@ class StatisticType extends AbstractType
             ->add('seconds', ChoiceType::class, array(
                 'mapped' => false,
                 'choices' => range(0, 59),
+                'label'=>'Secondes'
             ))
             ->add('machine',EntityType::class,[
                 'class' => Machines::class,

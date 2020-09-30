@@ -97,10 +97,10 @@ class StatisticController extends AbstractController
                 $statistic->setTime($minutes . '.' . $seconds);
             }
 
-
-
-
-            if ($minutes === 0 && $seconds === 0 && $statistic->getWeight() === null) {
+            if (($minutes === 0 && $seconds === 0 && $statistic->getWeight() === null) 
+            || ($minutes !== 0 && $seconds !== 0 && $statistic->getWeight() !== null)
+            || ($minutes !== 0 && $seconds === 0 && $statistic->getWeight() !== null)
+            || ($minutes === 0 && $seconds !== 0 && $statistic->getWeight() !== null)) {
                 $this->addFlash(
                     'danger',
                     'Vous devez choisir soit un poids soit un temps'

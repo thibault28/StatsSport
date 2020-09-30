@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use DateTime;
 use DateTimeZone;
@@ -15,6 +16,7 @@ use DateTimeZone;
 /**
  * @ORM\Entity(repositoryClass=MachinesRepository::class)
  * @Vich\Uploadable
+ * @UniqueEntity("name")
  */
 class Machines
 {
@@ -50,7 +52,7 @@ class Machines
     private $imageFile;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
